@@ -2,8 +2,9 @@
 
 const fetchScienceMuseum = async (urlSearch) => {
     const url = 'https://collection.sciencemuseumgroup.org.uk';
-    
-    fetch(`${url}${urlSearch}`, { headers: { Accept: 'application/json' } })
+    let fetchedData
+
+    await fetch(`${url}${urlSearch}`, { headers: { Accept: 'application/json' } })
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -12,11 +13,14 @@ const fetchScienceMuseum = async (urlSearch) => {
         }
       })
       .then((json) => {
-        console.log(json);
+        // console.log(json);
+        fetchedData = json.data
       })
       .catch((err) => {
         console.error(err);
       });
+
+    return fetchedData
 }
 
 module.exports = {fetchScienceMuseum}
